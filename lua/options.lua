@@ -9,6 +9,33 @@ vim.opt.number = true
 --  Experiment for yourself to see if you like it!
 vim.opt.relativenumber = true
 
+-- [[ Indentation ]]
+vim.opt.expandtab = false
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 0
+
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+
+local function set_space_configuration(patterns)
+  for _, pattern in ipairs(patterns) do
+    vim.api.nvim_create_autocmd({ 'FileType' }, {
+      pattern = pattern,
+      callback = function()
+        vim.bo.expandtab = true
+        vim.bo.tabstop = 4
+        vim.bo.shiftwidth = 4
+        vim.bo.softtabstop = 4
+      end,
+    })
+  end
+end
+
+set_space_configuration { 'python' }
+
+-- [[ Other ]]
+
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
@@ -50,7 +77,7 @@ vim.opt.splitbelow = true
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { lead = '·', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
@@ -65,5 +92,3 @@ vim.opt.scrolloff = 10
 -- instead raise a dialog asking if you wish to save the current file(s)
 -- See `:help 'confirm'`
 vim.opt.confirm = true
-
--- vim: ts=2 sts=2 sw=2 et
