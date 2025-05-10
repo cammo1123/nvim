@@ -4,6 +4,7 @@
 
 require('lazy').setup({
   'tpope/vim-sleuth',
+  'neovim/nvim-lspconfig',
   { import = 'cammo1123.plugins' },
 }, {
   ui = {

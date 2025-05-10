@@ -10,6 +10,13 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 
 -- [[ Indentation ]]
+
+-- Sets how neovim will display certain whitespace characters in the editor.
+--  See `:help 'list'`
+--  and `:help 'listchars'`
+vim.opt.list = true
+vim.opt.listchars = { trail = '·', nbsp = '␣', tab = '  ', lead = '·' }
+
 vim.opt.expandtab = false
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
@@ -27,6 +34,7 @@ local function set_space_configuration(patterns)
         vim.bo.tabstop = 4
         vim.bo.shiftwidth = 4
         vim.bo.softtabstop = 4
+		vim.opt.listchars = { trail = '·', nbsp = '␣', tab = '»·' }
       end,
     })
   end
@@ -46,9 +54,6 @@ vim.opt.showmode = false
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.schedule(function()
-  vim.opt.clipboard = 'unnamedplus'
-end)
 
 -- Enable break indent
 vim.opt.breakindent = true
@@ -72,12 +77,6 @@ vim.opt.timeoutlen = 300
 -- Configure how new splits should be opened
 vim.opt.splitright = true
 vim.opt.splitbelow = true
-
--- Sets how neovim will display certain whitespace characters in the editor.
---  See `:help 'list'`
---  and `:help 'listchars'`
-vim.opt.list = true
-vim.opt.listchars = { lead = '·', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
